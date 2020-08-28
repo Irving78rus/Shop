@@ -95,14 +95,14 @@ function rednerBasket(count) {
     for (var i = 0; i < basket.length; i++) {
         var cardElement = createCardInBasket(basket[i],count)
         containerProductInBasket.append(cardElement); // вызвал
-        
+        cardElement.append('Общая цена = prise*'+ count);
     }
 }
 rednerBasket();
 
 
 //createCardInBasket создает товар
-function createCardInBasket(any,count){
+function createCardInBasket(any){
     
     var div = document.createElement('div');
     div.className = "clothesInBasket";
@@ -125,7 +125,7 @@ function createCardInBasket(any,count){
     buttonMinus.innerHTML = "Убрать единицу товара";
     buttonMinus.className = "buttonBasket";
     buttonMinus.id = any.id + "Minus";
-    div.append('Общая цена = prise*'+ count);
+    
 
     return div
 }
