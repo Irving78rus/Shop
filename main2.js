@@ -17,6 +17,10 @@ var containerProductInBasket = document.createElement("div");
     allBasket.appendChild(containerProductInBasket);
     containerProductInBasket.classList.add("containerProductInBasket");
 
+var headerBasket = document.createElement("div");
+    allBasket.appendChild(headerBasket);
+    headerBasket.classList.add("headerBasket");
+    headerBasket.append("Заглушка: общая стоимость товара  = allCost"); 
 
 
 
