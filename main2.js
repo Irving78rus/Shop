@@ -12,7 +12,7 @@ var headerBasket = document.createElement("div");
     allBasket.appendChild(headerBasket);
     headerBasket.classList.add("headerBasket");
     headerBasket.append("Корзина товаров");
-    
+
 var containerProductInBasket = document.createElement("div");
     allBasket.appendChild(containerProductInBasket);
     containerProductInBasket.classList.add("containerProductInBasket");
@@ -20,7 +20,8 @@ var containerProductInBasket = document.createElement("div");
 var headerBasket = document.createElement("div");
     allBasket.appendChild(headerBasket);
     headerBasket.classList.add("headerBasket");
-    headerBasket.append("Заглушка: общая стоимость товара  = allCost"); 
+    headerBasket.append("Заглушка: общая стоимость товара  = allCost");    
+
 
 
 
@@ -34,10 +35,30 @@ var clothes = [
 // Basket это массив , в который мы будем помещать объект, на который кликнули в каталоге
 // Пока он просто заполнен для наглядности
 var basket = [
-    { id: 'q1234', name: 'Shirt', price: 1000, img: 'img/shirt.png' },
-    { id: 'w1234', name: 'Boots', price: 2000, img: 'img/boots.png' },
-    { id: 'e1234', name: 'Jeans', price: 3000, img: 'img/jeans.png' },
+    
 ];
+
+// считывает нажатие по ай-ди и добавляет товар в наш баскет
+function buttonclick(e){
+    var targid = e.target.id
+    var foundProduct = clothes.find(func => func.id == targid)
+     
+    if(basket.indexOf(foundProduct) == -1){
+      foundProduct.count = 1
+      basket.push(foundProduct) 
+    }
+    else if(basket.indexOf(foundProduct) > -1){
+        foundProduct.count++
+    }
+    var count = foundProduct.count
+    console.log(count)
+    
+    document.querySelector('.containerProductInBasket').innerHTML = '';
+    rednerBasket(count);
+    return count
+}
+
+
 
 // Отрисовываем каталог
 function rednerCatalog() {
@@ -64,22 +85,25 @@ function createCard(any){
     button.innerHTML = "Добавить товар в корзину";
     button.className = "buttonIn";
     button.id = any.id;
+    button.onclick = buttonclick
     return div
 }
 
 
 //rednerBasket Отрисовывает товары в корзине
-function rednerBasket() {
+function rednerBasket(count) {
     for (var i = 0; i < basket.length; i++) {
-        var cardElement = createCardInBasket(basket[i])
+        var cardElement = createCardInBasket(basket[i],count)
         containerProductInBasket.append(cardElement); // вызвал
+        
     }
 }
 rednerBasket();
 
 
 //createCardInBasket создает товар
-function createCardInBasket(any){
+function createCardInBasket(any,count){
+    
     var div = document.createElement('div');
     div.className = "clothesInBasket";
     div.append(any.name + "\n");
@@ -92,16 +116,16 @@ function createCardInBasket(any){
 
     var buttonPlus = document.createElement("button");
     div.append(buttonPlus);
-    buttonPlus.innerHTML = "Добавить товар в корзину";
+    buttonPlus.innerHTML = "Добавить единицу товара";
     buttonPlus.className = "buttonBasket";
     buttonPlus.id = any.id + "Plus";
 
     var buttonMinus = document.createElement("button");
     div.append(buttonMinus);
-    buttonMinus.innerHTML = "Убрать товар из корзины";
+    buttonMinus.innerHTML = "Убрать единицу товара";
     buttonMinus.className = "buttonBasket";
     buttonMinus.id = any.id + "Minus";
-    div.append('заглушка = basket.prise*counter');
+    div.append('Общая цена = prise*'+ count);
 
     return div
 }
