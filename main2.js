@@ -52,6 +52,7 @@ function buttonclick(e){
     }
     var count = foundProduct.count
     console.log(count)
+    console.log(basket)
     
     document.querySelector('.containerProductInBasket').innerHTML = '';
     rednerBasket(count);
@@ -91,18 +92,18 @@ function createCard(any){
 
 
 //rednerBasket Отрисовывает товары в корзине
-function rednerBasket(count) {
+function rednerBasket() {
     for (var i = 0; i < basket.length; i++) {
-        var cardElement = createCardInBasket(basket[i],count)
+        var cardElement = createCardInBasket(basket[i])
         containerProductInBasket.append(cardElement); // вызвал
-        cardElement.append('Общая цена = prise*'+ count);
+        
     }
 }
 rednerBasket();
 
 
 //createCardInBasket создает товар
-function createCardInBasket(any){
+function createCardInBasket(any,count){
     
     var div = document.createElement('div');
     div.className = "clothesInBasket";
@@ -125,6 +126,16 @@ function createCardInBasket(any){
     buttonMinus.innerHTML = "Убрать единицу товара";
     buttonMinus.className = "buttonBasket";
     buttonMinus.id = any.id + "Minus";
+
+
+    var counter = document.createElement('div');
+    counter.className = "headerBasket";
+    div.append("Общая Цена: " + any.price * any.count +' р');
+    
+
+
+
+
     
 
     return div
