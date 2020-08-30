@@ -1,3 +1,4 @@
+
 //Статика
 var product = document.createElement("div");
 document.body.appendChild(product);
