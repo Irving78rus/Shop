@@ -13,6 +13,27 @@ allBasket.appendChild(headerBasket);
 headerBasket.classList.add("headerBasket");
 headerBasket.append("Корзина товаров");
 
+var buttonClear = document.createElement("button");
+allBasket.appendChild(buttonClear);
+buttonClear.classList.add("buttonIn");
+buttonClear.append("очистить корзину");
+buttonClear.id = 'Clear';
+buttonClear.onclick = buttonClearGo;
+
+function buttonClearGo() {
+
+    basket.splice(0, basket.length);
+
+
+    document.querySelector('.containerProductInBasket').innerHTML = '';
+    document.querySelector('.costBasket').remove();
+    var headerBasket = document.createElement("div");
+    allBasket.appendChild(headerBasket);
+    headerBasket.classList.add("costBasket");
+    headerBasket.append("В корзине нет товаров");
+
+}
+
 var containerProductInBasket = document.createElement("div");
 allBasket.appendChild(containerProductInBasket);
 containerProductInBasket.classList.add("containerProductInBasket");
@@ -56,7 +77,7 @@ function buttonclickPlus(e) {
     for (var i = 0; i < basket.length; i++) { // Считаем общую стоимость корзины
         allSum += basket[i].cost
     }
-
+    console.log(basket)
     document.querySelector('.costBasket').remove(); // Очищаем общ. стоимость корзины
 
     var headerBasket = document.createElement("div"); // выводим общую стоимость корзины
@@ -82,7 +103,7 @@ function buttonclickMinus(e) { // все по аналогии
     for (var i = 0; i < basket.length; i++) {
         allSum += basket[i].cost
     }
-
+    console.log(basket)
     document.querySelector('.costBasket').remove();
 
     var headerBasket = document.createElement("div");
@@ -96,6 +117,14 @@ function buttonclickMinus(e) { // все по аналогии
     if (foundProduct.count == 0) { //Удаляем карточку товара если количество равно 0
         basket.splice(basket.indexOf(foundProduct), 1)
         document.getElementById(targid + 'block').remove();
+
+    }
+    if (allSum == 0) {
+        document.querySelector('.costBasket').remove();
+        var headerBasket = document.createElement("div");
+        allBasket.appendChild(headerBasket);
+        headerBasket.classList.add("costBasket");
+        headerBasket.append("В корзине нет товаров");
     }
 
 }
