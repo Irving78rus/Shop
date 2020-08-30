@@ -39,43 +39,37 @@ var basket = [];
 
 
 function buttonclickPlus(e) {
-
     var allSum = 0;
     var targid = e.target.id
-    var foundProduct = clothes.find(func => func.id == targid)
-    console.log(foundProduct)
-    if (basket.indexOf(foundProduct) == -1) {
+    var foundProduct = clothes.find(func => func.id == targid) // ищем объект в каталоге
+
+    if (basket.indexOf(foundProduct) == -1) { //если в массиве крзины объекта нет добавлем его в массив и добавляем свойства количества и общей стоимости 
         foundProduct.count = 1
         foundProduct.cost = foundProduct.count * foundProduct.price
         basket.push(foundProduct)
 
-    } else if (basket.indexOf(foundProduct) !== -1) {
+    } else if (basket.indexOf(foundProduct) !== -1) { //если в массиве есть такой объект, то просто изменяем кол-во и общ. стоимость
         foundProduct.count++
             foundProduct.cost = foundProduct.count * foundProduct.price
     }
 
-    for (var i = 0; i < basket.length; i++) {
-
-        if (basket.cost < 0) {
-            basket.cost = 0
-        }
+    for (var i = 0; i < basket.length; i++) { // Считаем общую стоимость корзины
         allSum += basket[i].cost
-
     }
-    console.log(basket)
 
-    document.querySelector('.costBasket').remove();
+    document.querySelector('.costBasket').remove(); // Очищаем общ. стоимость корзины
 
-    var headerBasket = document.createElement("div");
+    var headerBasket = document.createElement("div"); // выводим общую стоимость корзины
     allBasket.appendChild(headerBasket);
     headerBasket.classList.add("costBasket");
     headerBasket.append("Общая стоимость покупок " + allSum);
-    document.querySelector('.containerProductInBasket').innerHTML = '';
+    document.querySelector('.containerProductInBasket').innerHTML = ''; // Удаляем старую карточку товара в корзине
+
     rednerBasket();
 
 }
 
-function buttonclickMinus(e) {
+function buttonclickMinus(e) { // все по аналогии
     var allSum = 0;
     var targid = e.target.id
     var foundProduct = clothes.find(func => func.id == targid)
@@ -86,13 +80,9 @@ function buttonclickMinus(e) {
     }
 
     for (var i = 0; i < basket.length; i++) {
-
-        if (basket.cost < 0) {
-            basket.cost = 0
-        }
         allSum += basket[i].cost
     }
-    console.log(basket)
+
     document.querySelector('.costBasket').remove();
 
     var headerBasket = document.createElement("div");
@@ -103,7 +93,7 @@ function buttonclickMinus(e) {
 
     rednerBasket();
 
-    if (foundProduct.count == 0) {
+    if (foundProduct.count == 0) { //Удаляем карточку товара если количество равно 0
         basket.splice(basket.indexOf(foundProduct), 1)
         document.getElementById(targid + 'block').remove();
     }
@@ -184,7 +174,7 @@ function createCardInBasket(any) {
     var counter = document.createElement('div');
     counter.className = "headerBasket";
 
-    div.append("Общая Цена: " + any.cost + ' р');
+    div.append("Общая Цена: " + any.cost + ' р'); //выводим стоимость карточки товара
 
     return div
 }
