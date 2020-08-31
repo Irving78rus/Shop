@@ -1,2 +1,1 @@
-
-Смотрите последнюю версию кода
+create function  showCostInBasket, basketWithOutProduct,  countCostBasket
