@@ -92,7 +92,7 @@ function buttonclickMinus(event) { // все по аналогии
     }
     if (allSum == 0) {
         document.querySelector('.costBasket').remove();
-        basketWithOutProduct()
+        basketWithoutProduct()
     }
 
 }
@@ -181,17 +181,17 @@ function buttonClearGo() {
     basket.splice(0, basket.length);
     document.querySelector('.containerProductInBasket').innerHTML = '';
     document.querySelector('.costBasket').remove();
-    basketWithOutProduct()
+    basketWithoutProduct()
 }
 
 
-function basketWithOutProduct() {
+function basketWithoutProduct() {
     var headerBasket = document.createElement("div");
     allBasket.appendChild(headerBasket);
     headerBasket.classList.add("costBasket");
     headerBasket.append("В корзине нет товаров");
 }
-basketWithOutProduct()
+basketWithoutProduct()
 
 function showCostInBasket(allSum) {
     document.querySelector('.costBasket').remove(); // Очищаем общ. стоимость корзины
